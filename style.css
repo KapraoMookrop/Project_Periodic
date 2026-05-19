@@ -1,0 +1,357 @@
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(222, 226, 230, 0.5);
+    --accent-color: #007bff;
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+    --header-text: #444;
+    --button-bg: #ffffff;
+    --button-hover: #e9ecef;
+    
+    /* Category Colors with Transparency */
+    --alkali-metal: rgba(255, 204, 203, 0.6);
+    --alkaline-earth: rgba(255, 228, 181, 0.6);
+    --transition-metal: rgba(173, 216, 230, 0.6);
+    --post-transition: rgba(211, 211, 211, 0.6);
+    --metalloid: rgba(144, 238, 144, 0.6);
+    --nonmetal: rgba(240, 230, 140, 0.6);
+    --noble-gas: rgba(230, 230, 250, 0.6);
+    --lanthanide: rgba(255, 182, 193, 0.6);
+    --actinide: rgba(255, 160, 122, 0.6);
+    --halogen: rgba(250, 250, 210, 0.6);
+}
+
+body.dark-theme {
+    --bg-color: #0b0e14;
+    --text-color: #ffffff;
+    --card-bg: rgba(25, 30, 40, 0.7);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --accent-color: #00d2ff;
+    --modal-overlay: rgba(0, 0, 0, 0.9);
+    --header-text: #ffffff;
+    --button-bg: #1a1f2b;
+    --button-hover: #2a3245;
+
+    /* Vibrant, Neon-like Category Colors for Dark Mode */
+    --alkali-metal: rgba(255, 50, 50, 0.5);
+    --alkaline-earth: rgba(255, 150, 0, 0.5);
+    --transition-metal: rgba(0, 180, 255, 0.5);
+    --post-transition: rgba(150, 150, 150, 0.5);
+    --metalloid: rgba(50, 255, 50, 0.5);
+    --nonmetal: rgba(200, 255, 0, 0.5);
+    --noble-gas: rgba(180, 50, 255, 0.5);
+    --lanthanide: rgba(255, 50, 255, 0.5);
+    --actinide: rgba(255, 100, 50, 0.5);
+    --halogen: rgba(255, 255, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 3D Container */
+#container-3d {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    display: none;
+    background: radial-gradient(circle at center, var(--bg-color) 0%, #000 100%);
+    opacity: 0.9;
+}
+
+#container-2d {
+    position: relative;
+    z-index: 2;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-weight: 300;
+    color: var(--header-text);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 20px;
+    border: 1px solid var(--card-border);
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Kanit', sans-serif;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+button.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+#btn-theme {
+    font-size: 1.2rem;
+    padding: 5px 15px;
+}
+
+/* Periodic Table Layouts */
+#periodic-table {
+    display: grid;
+    gap: 8px;
+    margin: 0 auto;
+    max-width: 100vw;
+    transition: all 0.5s ease;
+}
+
+/* Classic Table Grid */
+.layout-classic {
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+}
+
+/* Dense Grid */
+.layout-dense {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+}
+
+/* List View */
+.layout-list {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.layout-list .element-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+    height: auto;
+    width: 100%;
+}
+
+.layout-list .element-card .symbol {
+    font-size: 1.5rem;
+    width: 60px;
+}
+
+.layout-list .element-card .name {
+    display: block !important;
+    margin-left: 20px;
+    font-size: 1rem;
+}
+
+/* Element Card */
+.element-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: 8px;
+    backface-visibility: visible;
+    color: var(--text-color);
+}
+
+.element-card:hover {
+    transform: scale(1.15) translateZ(50px);
+    z-index: 100;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-theme .element-card:hover {
+    background-color: rgba(60, 60, 60, 0.9);
+}
+
+.number {
+    font-size: 0.8rem;
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.symbol {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.name {
+    font-size: 0.7rem;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+}
+
+/* Layout transition animation */
+.layout-changing .element-card {
+    opacity: 0;
+    transform: scale(0.5) rotateY(90deg);
+}
+
+/* Category Backgrounds with Transparency */
+.alkali-metal { background-color: var(--alkali-metal); }
+.alkaline-earth { background-color: var(--alkaline-earth); }
+.transition-metal { background-color: var(--transition-metal); }
+.post-transition { background-color: var(--post-transition); }
+.metalloid { background-color: var(--metalloid); }
+.nonmetal { background-color: var(--nonmetal); }
+.noble-gas { background-color: var(--noble-gas); }
+.lanthanide { background-color: var(--lanthanide); }
+.actinide { background-color: var(--actinide); }
+.halogen { background-color: var(--halogen); }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-overlay);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    margin: 10vh auto;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    position: relative;
+    transform: translateY(0);
+    animation: modalSlideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes modalSlideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-button {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.close-button:hover {
+    opacity: 1;
+}
+
+.modal-header {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+#modal-number {
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+#modal-symbol {
+    font-size: 4rem;
+    margin: 0;
+    background: linear-gradient(135deg, var(--accent-color), #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#modal-name {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.category-label {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.modal-body {
+    border-top: 1px solid var(--card-border);
+    padding-top: 25px;
+}
+
+#modal-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+    .layout-classic {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .element-card {
+        width: 70px;
+        height: 80px;
+    }
+}
