@@ -80,6 +80,7 @@ body {
     position: relative;
     z-index: 2;
     transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow: auto;
 }
 
 header {
@@ -135,7 +136,7 @@ button.active {
     display: grid;
     gap: 8px;
     margin: 0 auto;
-    max-width: 100vw;
+    width: fit-content;
     transition: all 0.5s ease;
     overflow: auto;
 }
