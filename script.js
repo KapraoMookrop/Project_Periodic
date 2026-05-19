@@ -267,7 +267,12 @@ function init3D() {
     controls.minDistance = 500;
     controls.maxDistance = 6000;
     controls.rotateSpeed = 2.0;
+    controls.noPan = true; // Disable moving the group (pan)
+    controls.noRotate = false;
+    controls.noZoom = false;
+    controls.staticMoving = false;
     controls.dynamicDampingFactor = 0.1;
+    controls.target.set(0, 0, 0); // Lock center point
     controls.addEventListener('change', render3D);
 
     window.addEventListener('resize', onWindowResize, false);
