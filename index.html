@@ -13,12 +13,22 @@
     <header>
         <h1>Periodic Table of Elements</h1>
         <div class="controls">
-            <button id="btn-classic" class="active">Classic Table</button>
-            <button id="btn-dense">Dense Grid</button>
-            <button id="btn-list">List View</button>
-            <button id="btn-3d">3D Sphere</button>
-            <button id="btn-helix">3D Helix</button>
-            <button id="btn-grid">3D Grid</button>
+            <div class="layout-buttons desktop-only">
+                <button id="btn-classic" class="active">Classic Table</button>
+                <button id="btn-dense">Dense Grid</button>
+                <button id="btn-list">List View</button>
+                <button id="btn-3d">3D Sphere</button>
+                <button id="btn-helix">3D Helix</button>
+                <button id="btn-grid">3D Grid</button>
+            </div>
+            <select id="layout-select" class="mobile-only">
+                <option value="btn-classic">Classic Table</option>
+                <option value="btn-dense">Dense Grid</option>
+                <option value="btn-list">List View</option>
+                <option value="btn-3d">3D Sphere</option>
+                <option value="btn-helix">3D Helix</option>
+                <option value="btn-grid">3D Grid</option>
+            </select>
             <button id="btn-theme" title="Toggle Dark Mode">🌙</button>
         </div>
     </header>

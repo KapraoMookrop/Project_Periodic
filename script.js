@@ -323,28 +323,47 @@ function render3D() {
 }
 
 // Layout switching logic
+const layoutSelect = document.getElementById('layout-select');
+
+layoutSelect.addEventListener('change', function() {
+    const selectedBtnId = this.value;
+    document.getElementById(selectedBtnId).click();
+});
+
+function syncLayoutSelect(btnId) {
+    if (layoutSelect) {
+        layoutSelect.value = btnId;
+    }
+}
+
 document.getElementById('btn-classic').addEventListener('click', function() {
     updateLayout('layout-classic', this);
+    syncLayoutSelect('btn-classic');
 });
 
 document.getElementById('btn-dense').addEventListener('click', function() {
     updateLayout('layout-dense', this);
+    syncLayoutSelect('btn-dense');
 });
 
 document.getElementById('btn-list').addEventListener('click', function() {
     updateLayout('layout-list', this);
+    syncLayoutSelect('btn-list');
 });
 
 document.getElementById('btn-3d').addEventListener('click', function() {
     switchTo3D(targets.sphere, this);
+    syncLayoutSelect('btn-3d');
 });
 
 document.getElementById('btn-helix').addEventListener('click', function() {
     switchTo3D(targets.helix, this);
+    syncLayoutSelect('btn-helix');
 });
 
 document.getElementById('btn-grid').addEventListener('click', function() {
     switchTo3D(targets.grid, this);
+    syncLayoutSelect('btn-grid');
 });
 
 function updateLayout(layoutClass, btn) {
