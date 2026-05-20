@@ -123,6 +123,10 @@ const tableContainer = document.getElementById('periodic-table');
 const modal = document.getElementById('element-modal');
 const closeBtn = document.querySelector('.close-button');
 
+const instagramModal = document.getElementById('instagram-modal');
+const instagramBtn = document.getElementById('btn-instagram');
+const closeInstagramBtn = document.getElementById('close-instagram');
+
 // 3D Variables
 let camera, scene, renderer, controls;
 let objects = [];
@@ -134,6 +138,15 @@ document.getElementById('btn-theme').addEventListener('click', function() {
     const isDark = document.body.classList.contains('dark-theme');
     this.textContent = isDark ? '☀️' : '🌙';
 });
+
+// Instagram Modal
+instagramBtn.addEventListener('click', () => {
+    instagramModal.style.display = 'block';
+});
+
+closeInstagramBtn.onclick = () => {
+    instagramModal.style.display = 'none';
+};
 
 function renderElements() {
     tableContainer.innerHTML = '';
@@ -186,6 +199,7 @@ function getThaiCategory(category) {
 closeBtn.onclick = () => modal.style.display = 'none';
 window.onclick = (event) => {
     if (event.target == modal) modal.style.display = 'none';
+    if (event.target == instagramModal) instagramModal.style.display = 'none';
 };
 
 // 3D Initialization
